@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+
+    <title>
+
+        How to show Page Loading div until
+
+        the page has finished loading?
+
+    </title>
+
+
+    <style>
+        /* body{
+            background-color: aquamarine;
+        } */
+
+        #loader {
+
+            border: 12px solid #f3f3f3;
+
+            border-radius: 50%;
+
+            border-top: 12px solid #444444;
+            border-top-color: green;
+
+            width: 70px;
+
+            height: 70px;
+
+            animation: spin 1s linear infinite;
+
+        }
+
+
+        .center {
+
+            position: absolute;
+
+            top: 0;
+
+            bottom: 0;
+
+            left: 0;
+
+            right: 0;
+
+            margin: auto;
+
+        }
+
+
+        @keyframes spin {
+
+            100% {
+
+                transform: rotate(360deg);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="loader" class="center"></div>
+
+    <h1>GeeksforGeeks</h1>
+
+    <h2>A computer science portal for geeks</h2>
+
+
+    <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20230723195619/GfG-Image.png"
+
+        alt="GeeksforGeeks logo" />
+
+        
+
+    <script>
+
+        document.onreadystatechange = function () {
+            // alert('yes')
+
+            if (document.readyState !== "complete") {
+
+                document.querySelector(
+
+                    "body").style.visibility = "hidden";
+
+                document.querySelector(
+
+                    "#loader").style.visibility = "visible";
+
+            } else {
+
+                setTimeout(() => {
+                    document.querySelector(
+
+                    "#loader").style.display = "none";
+
+                    document.querySelector(
+
+                        "body").style.visibility = "visible";
+                }, 300000);
+
+                
+
+            }
+
+        };
+
+        const loader = document.getElementById("loader");
+        let redIndex = 0;
+        let blueIndex = 0;
+        let greenIndex = 0;
+        let color = `rgb(${redIndex}, ${blueIndex}, ${greenIndex})`;
+
+        function changeColor() {
+            setInterval(() => {
+                if (redIndex < 255) {
+                    redIndex++;
+                }else{
+                    redIndex--;
+                    if (blueIndex < 255) {
+                        blueIndex++;
+                    }else{
+                        blueIndex--;
+                        if (greenIndex < 255) {
+                            greenIndex++;
+                        }else{
+                            greenIndex--;
+                            redIndex = 0;
+                            blueIndex = 0;
+                            greenIndex = 0;
+                        }
+                    }
+                }
+                color = `rgb(${redIndex}, ${blueIndex}, ${greenIndex})`;
+                loader.style.borderTopColor = color;
+            }, 10);
+        }
+
+        function changeColor2() {
+            let redIndex = 0;
+            let blueIndex = 0;
+            let greenIndex = 0;
+            let color = `rgb(${redIndex}, ${blueIndex}, ${greenIndex})`;
+
+            setInterval(() => {
+                redIndex = Math.floor(Math.random()*255) + 30;
+                blueIndex = Math.floor(Math.random()*255) + 1;
+                greenIndex = Math.floor(Math.random()*255) + 1;
+                color = `rgb(${redIndex}, ${blueIndex}, ${greenIndex})`;
+                loader.style.borderTopColor = color;
+            }, 1000);
+        }
+        changeColor2();
+    </script>
+
+</body>
+
+
+</html>
